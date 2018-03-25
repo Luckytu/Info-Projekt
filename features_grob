@@ -1,0 +1,52 @@
+- Spielfeld
+  - Quadern
+    - Höhe
+    - Betretbarkeit/Besetztheit
+    - Schaden
+    - Deckungen
+  - Graph
+    - Knoten: Felder
+    - Kanten: Unterschied der Höhen
+    - Reichweite Laufen --> Kürzeste Weg zw. Feldern
+    - Reichweite Schießen --> Direkte Weg zw. Feldern
+
+- Einheiten
+  - Eigenschaften
+    - HP
+    - AP
+    - Größe *
+  - Angriffe
+    - Reichweite
+    - Schaden
+    - AP-Verbrauch pro Angriff
+  - Bewegung
+    - Reichweite
+    - Maximale überwindbare Höhe
+    - AP-Verbrauch pro Bewegung
+  - Inventar / Ausrüstungsvariation *
+  - Einheitenklassen *
+
+- Game Manager
+  - Steuert Einheiten
+  - KI *
+  - Wechselt Runden ab
+  - Erstellt Karte
+    - Bilderkennung *
+  - Spawnt Einheiten
+  - Überprüft Sieg und Niederlage --> Startet und beendet das Spiel
+
+- Graphikoberfläche
+  - Einheiten und Felder *
+  - UI
+
+- Datenbankanbindung
+  - Speichern und Laden
+
+- Sonstige Aufgaben
+  - Protokoll
+  - Aufgabenverteilung
+  - Übergabedokumente
+
+
+
+* = optional
