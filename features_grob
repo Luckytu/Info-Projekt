@@ -7,8 +7,8 @@
   - Graph
     - Knoten: Felder
     - Kanten: Unterschied der Höhen
-    - Reichweite Laufen --> Kürzeste Weg zw. Feldern
-    - Reichweite Schießen --> Direkte Weg zw. Feldern
+    - Reichweite Laufen --> Kürzester Weg zw. Feldern
+    - Reichweite Schießen --> Direkter Weg zw. Feldern
 
 - Einheiten
   - Eigenschaften
