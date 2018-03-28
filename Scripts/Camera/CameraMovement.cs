@@ -13,10 +13,13 @@ public class CameraMovement : MonoBehaviour
     public float speed;
 
     private Vector3 rotationAxis;
+
+    public int rotationSteps;
     public float rotationAngleX;
+    private float rotationAngleY;
+
     public float rotationDistance;
     public float rotationDuration;
-    public int rotationSteps;
 
 
     // Use this for initialization
@@ -29,6 +32,8 @@ public class CameraMovement : MonoBehaviour
         camera = GameObject.Find("Main Camera");
         camera.transform.localPosition = new Vector3(0, height, -rotationDistance);
         camera.transform.localEulerAngles = new Vector3(rotationAngleX, 0, 0);
+
+        rotationAngleY = 360 / (float)rotationSteps;
     }
 
     // Update is called once per frame
@@ -81,8 +86,6 @@ public class CameraMovement : MonoBehaviour
 
     private void rotateInitialize(bool clockWise)
     {
-        float rotationAngleY = 360 / (float)rotationSteps;
-
         print(rotationAngleY);
 
         Quaternion start = cameraTransform.rotation;
