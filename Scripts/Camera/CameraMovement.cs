@@ -68,12 +68,12 @@ public class CameraMovement : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.Q))
         {
-            rotateInitialize(false);
+            rotateInitialize(true);
         }
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            rotateInitialize(true);
+            rotateInitialize(false);
         }
 
         cameraTransform.Translate(movement * Time.deltaTime);
@@ -86,7 +86,7 @@ public class CameraMovement : MonoBehaviour
         print(rotationAngleY);
 
         Quaternion start = cameraTransform.rotation;
-        Quaternion end = clockWise? Quaternion.Euler(0, start.eulerAngles.y - rotationAngleY, 0) : Quaternion.Euler(0, start.eulerAngles.y + rotationAngleY, 0);
+        Quaternion end = clockWise? Quaternion.Euler(0, start.eulerAngles.y + rotationAngleY, 0) : Quaternion.Euler(0, start.eulerAngles.y - rotationAngleY, 0);
 
         print("Start: " + start.eulerAngles.y);
         print("End: " + end.eulerAngles.y);
