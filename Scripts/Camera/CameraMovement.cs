@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,9 +13,10 @@ public class CameraMovement : MonoBehaviour
     public float speed;
 
     private Vector3 rotationAxis;
-    public float rotationAngle;
+    public float rotationAngleX;
     public float rotationDistance;
-    public float rotationSpeed;
+    public float rotationDuration;
+    public int rotationSteps;
 
 
     // Use this for initialization
@@ -27,7 +28,7 @@ public class CameraMovement : MonoBehaviour
 
         camera = GameObject.Find("Main Camera");
         camera.transform.localPosition = new Vector3(0, height, -rotationDistance);
-        camera.transform.localEulerAngles = new Vector3(rotationAngle, 0, 0);
+        camera.transform.localEulerAngles = new Vector3(rotationAngleX, 0, 0);
     }
 
     // Update is called once per frame
@@ -65,16 +66,45 @@ public class CameraMovement : MonoBehaviour
             }
         }
 
-        if(Input.GetKey(KeyCode.Q))
+        if(Input.GetKeyDown(KeyCode.Q))
         {
-            cameraTransform.Rotate(new Vector3(0, rotationSpeed * Time.deltaTime, 0));
+            rotateInitialize(false);
         }
 
-        if (Input.GetKey(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            cameraTransform.Rotate(new Vector3(0, -rotationSpeed * Time.deltaTime, 0));
+            rotateInitialize(true);
         }
 
         cameraTransform.Translate(movement * Time.deltaTime);
+    }
+
+    private void rotateInitialize(bool clockWise)
+    {
+        float rotationAngleY = 360 / (float)rotationSteps;
+
+        print(rotationAngleY);
+
+        Quaternion start = cameraTransform.rotation;
+        Quaternion end = clockWise? Quaternion.Euler(0, start.eulerAngles.y - rotationAngleY, 0) : Quaternion.Euler(0, start.eulerAngles.y + rotationAngleY, 0);
+
+        print("Start: " + start.eulerAngles.y);
+        print("End: " + end.eulerAngles.y);
+
+        StartCoroutine(rotate(start, end));
+    }
+
+    private IEnumerator rotate(Quaternion start, Quaternion end)
+    {
+        float timePassed = 0;
+
+        while(timePassed <= rotationDuration)
+        {
+            cameraTransform.rotation = Quaternion.Slerp(start, end, timePassed / rotationDuration);            
+            yield return null;
+            timePassed += Time.deltaTime;
+        }
+
+        cameraTransform.rotation = end;
     }
 }
