@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
+
     private Transform cameraTransform;
     private Vector3 movement;
-    private GameObject camera;
+    private GameObject cameraObject;
+    public Camera cameraProperties;
 
+    public float fieldOfView;
     public float height;
     public float speed;
 
@@ -24,13 +27,16 @@ public class CameraMovement : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        cameraProperties.orthographic = true;
+        cameraProperties.orthographicSize = fieldOfView;
+
         cameraTransform = GetComponent<Transform>();
         cameraTransform.position = new Vector3(0, 0, 0);
         cameraTransform.eulerAngles = new Vector3(0, 45, 0);
 
-        camera = GameObject.Find("Main Camera");
-        camera.transform.localPosition = new Vector3(0, height, -rotationDistance);
-        camera.transform.localEulerAngles = new Vector3(rotationAngleX, 0, 0);
+        cameraObject = GameObject.Find("Main Camera");
+        cameraObject.transform.localPosition = new Vector3(0, height, -rotationDistance);
+        cameraObject.transform.localEulerAngles = new Vector3(rotationAngleX, 0, 0);
 
         rotationAngleY = 360 / (float)rotationSteps;
     }
@@ -87,7 +93,7 @@ public class CameraMovement : MonoBehaviour
     {
         Quaternion start = cameraTransform.rotation;
         Quaternion end = clockWise? Quaternion.Euler(0, start.eulerAngles.y + rotationAngleY, 0) : Quaternion.Euler(0, start.eulerAngles.y - rotationAngleY, 0);
-
+        
         StartCoroutine(rotate(start, end));
     }
 
