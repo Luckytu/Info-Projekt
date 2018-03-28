@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
-
     private Transform cameraTransform;
     private Vector3 movement;
     private GameObject camera;
@@ -86,13 +85,8 @@ public class CameraMovement : MonoBehaviour
 
     private void rotateInitialize(bool clockWise)
     {
-        print(rotationAngleY);
-
         Quaternion start = cameraTransform.rotation;
         Quaternion end = clockWise? Quaternion.Euler(0, start.eulerAngles.y + rotationAngleY, 0) : Quaternion.Euler(0, start.eulerAngles.y - rotationAngleY, 0);
-
-        print("Start: " + start.eulerAngles.y);
-        print("End: " + end.eulerAngles.y);
 
         StartCoroutine(rotate(start, end));
     }
